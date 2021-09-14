@@ -19,17 +19,56 @@ let UsuarioController = class UsuarioController {
     constructor(usuarioService) {
         this.usuarioService = usuarioService;
     }
-    obtenerUno(parametrosRuta) {
-        return this.usuarioService.buscarUno(+parametrosRuta.idUsuario);
+    actualizarUno(params) {
+        const objWhere = {
+            id: Number(params.idUsuario),
+        };
+        const objetoUsuarioUpdate = {
+            apellido: params.apellido,
+            nombre: params.nombre,
+        };
+        const parametrosActualizar = {
+            where: objWhere,
+            data: objetoUsuarioUpdate,
+        };
+        return this.usuarioService.actualizarUno(parametrosActualizar);
+    }
+    crearUno(bodyParams) {
+        const objUsuario = {
+            apellido: bodyParams.apellido,
+            nombre: bodyParams.nombre,
+        };
+        return this.usuarioService.crearUno(objUsuario);
+    }
+    eliminarUno(parametro) {
+        const objUsuario = {
+            id: Number(parametro.idUsuario),
+        };
+        this.usuarioService.eliminarUno(objUsuario);
+        return "se elimino el usuario";
     }
 };
 __decorate([
-    common_1.Get(':idUsuario'),
+    common_1.Put('/:idUsuario/:apellido/:nombre'),
     __param(0, common_1.Param()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], UsuarioController.prototype, "obtenerUno", null);
+], UsuarioController.prototype, "actualizarUno", null);
+__decorate([
+    common_1.Post(),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "crearUno", null);
+__decorate([
+    common_1.Delete(':idUsuario'),
+    __param(0, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "eliminarUno", null);
 UsuarioController = __decorate([
     common_1.Controller('usuario'),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])

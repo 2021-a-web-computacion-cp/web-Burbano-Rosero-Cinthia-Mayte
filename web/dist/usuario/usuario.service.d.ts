@@ -3,11 +3,11 @@ import { Prisma } from '@prisma/client';
 export declare class UsuarioService {
     private prisma;
     constructor(prisma: PrismaService);
-    buscarUno(id: number): any;
-    crearUno(usuario: Prisma.EPN_USUARIOCreateInput): any;
+    buscarUno(id: number): Prisma.Prisma__EPN_USUARIOClient<import(".prisma/client").EPN_USUARIO>;
+    crearUno(usuario: Prisma.EPN_USUARIOCreateInput): Prisma.Prisma__EPN_USUARIOClient<import(".prisma/client").EPN_USUARIO>;
     actualizarUno(parametrosActualizar: {
         where: Prisma.EPN_USUARIOWhereUniqueInput;
         data: Prisma.EPN_USUARIOUpdateInput;
-    }): any;
-    eliminarUno(where: Prisma.EPN_USUARIOWhereUniqueInput): any;
+    }): Prisma.Prisma__EPN_USUARIOClient<import(".prisma/client").EPN_USUARIO>;
+    eliminarUno(where: Prisma.EPN_USUARIOWhereUniqueInput): Prisma.Prisma__EPN_USUARIOClient<import(".prisma/client").EPN_USUARIO>;
 }

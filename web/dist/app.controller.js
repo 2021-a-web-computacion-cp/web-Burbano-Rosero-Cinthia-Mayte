@@ -64,6 +64,19 @@ let AppController = class AppController {
             cabeceras: cabecerasPeticion,
         };
     }
+    suma(params, req, res) {
+        const parametrosRuta = params;
+        const numero1 = Number(parametrosRuta['numero1'].toString());
+        const numero2 = Number(parametrosRuta['numero2'].toString());
+        const result = operaciones(res, req, 'suma', numero1, numero2);
+        const resultadoSuma = result.resultadoOperacion;
+        const cookieResult = result.cookieResult;
+        return {
+            parametrosRuta,
+            resultadoSuma,
+            cookieResult,
+        };
+    }
 };
 __decorate([
     common_1.Get(),
@@ -139,9 +152,67 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "parametrosCuerpo", null);
+__decorate([
+    common_1.Get('suma/:numero1/:numero2'),
+    common_1.HttpCode(200),
+    __param(0, common_1.Param()),
+    __param(1, common_1.Req()),
+    __param(2, common_1.Res({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "suma", null);
 AppController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [app_service_1.AppService])
 ], AppController);
 exports.AppController = AppController;
+function operaciones(res, req, operacion, numero1, numero2) {
+    let resultadoOperaciones;
+    const cookieResult = req.cookies;
+    const valorCookie = cookieResult['cookieOperacion'];
+    switch (operacion) {
+        case 'suma': {
+            resultadoOperaciones = numero1 + numero2;
+            break;
+        }
+        case 'resta': {
+            resultadoOperaciones = numero1 - numero2;
+            break;
+        }
+        case 'multiplicacion': {
+            resultadoOperaciones = numero1 * numero2;
+            break;
+        }
+        case 'division': {
+            resultadoOperaciones = numero1 / numero2;
+            break;
+        }
+    }
+    if (valorCookie == undefined) {
+        const nuevoValor = 100 - resultadoOperaciones;
+        res.cookie('cookieOperacion', String(nuevoValor));
+        cookieResult['cookieOperacion'] = String(nuevoValor);
+        console.log('Se seteo la cookie');
+    }
+    else {
+        const nuevoValor = Number(valorCookie) - resultadoOperaciones;
+        if (nuevoValor > 0) {
+            cookieResult['cookieOperacion'] = String(nuevoValor);
+            res.cookie('cookieOperacion', String(nuevoValor));
+            console.log('ya existe una cookie1, valor actualizado');
+            console.log('Nuevo Valor: ' + cookieResult['cookieOperacion']);
+        }
+        else {
+            res.cookie('cookieOperacion', '100');
+            cookieResult['cookieOperacion'] = '100';
+            res.send('Terminaste el juego');
+        }
+    }
+    const resultadoOperacion = String(resultadoOperaciones);
+    return {
+        cookieResult,
+        resultadoOperacion,
+    };
+}
 //# sourceMappingURL=app.controller.js.map
