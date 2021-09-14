@@ -32,7 +32,7 @@ export declare class AppController {
         cookieResult: any;
     };
     multiplicacion(params: any, req: any, res: any): {
-        parametrosMC: any;
+        parametrosResult: any;
         resultadoMultiplicacion: string;
         cookieResult: any;
     };

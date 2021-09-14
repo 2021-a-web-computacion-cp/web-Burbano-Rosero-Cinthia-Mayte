@@ -91,14 +91,14 @@ let AppController = class AppController {
         };
     }
     multiplicacion(params, req, res) {
-        const parametrosMC = params;
-        const numero1 = Number(parametrosMC['numero1'].toString());
-        const numero2 = Number(parametrosMC['numero2'].toString());
+        const parametrosResult = params;
+        const numero1 = Number(parametrosResult['numero1'].toString());
+        const numero2 = Number(parametrosResult['numero2'].toString());
         const result = operaciones(res, req, 'multiplicacion', numero1, numero2);
         const resultadoMultiplicacion = result.resultadoOperacion;
         const cookieResult = result.cookieResult;
         return {
-            parametrosMC,
+            parametrosResult,
             resultadoMultiplicacion,
             cookieResult,
         };

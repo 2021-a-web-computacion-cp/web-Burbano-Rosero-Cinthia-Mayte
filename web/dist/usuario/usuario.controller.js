@@ -19,17 +19,21 @@ let UsuarioController = class UsuarioController {
     constructor(usuarioService) {
         this.usuarioService = usuarioService;
     }
-    obtenerUno(parametrosRuta) {
-        return this.usuarioService.buscarUno(+parametrosRuta.idUsuario);
+    crearUno(bodyParams) {
+        const objUsuario = {
+            apellido: bodyParams.apellido,
+            nombre: bodyParams.nombre,
+        };
+        return this.usuarioService.crearUno(objUsuario);
     }
 };
 __decorate([
-    common_1.Get(':idUsuario'),
-    __param(0, common_1.Param()),
+    common_1.Post(),
+    __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], UsuarioController.prototype, "obtenerUno", null);
+], UsuarioController.prototype, "crearUno", null);
 UsuarioController = __decorate([
     common_1.Controller('usuario'),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])
