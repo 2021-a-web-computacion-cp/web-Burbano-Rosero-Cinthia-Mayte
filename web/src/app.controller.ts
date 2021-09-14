@@ -8,7 +8,7 @@ import {
   HttpCode,
   InternalServerErrorException,
   Param,
-  Post,
+  Post, Put,
   Query,
   Req,
   Res,
@@ -112,6 +112,8 @@ export class AppController {
     };
   }
   //CALCULADORA
+
+  //SUMA
   @Get('suma/:numero1/:numero2')
   @HttpCode(200)
   suma(@Param() params, @Req() req, @Res({ passthrough: true }) res) {
@@ -129,6 +131,46 @@ export class AppController {
       cookieResult,
     };
   }
+  //RESTA
+  @Post('resta')
+  @HttpCode(201)
+  resta( @Body() bodyParams, @Headers() cabecerasPeticion, @Req() req, @Res({ passthrough: true }) res,) {
+    const parametrosdeCuerpoResult = bodyParams;
+    const numero1 = Number(parametrosdeCuerpoResult['numero1'].toString());
+    const numero2 = Number(parametrosdeCuerpoResult['numero2'].toString());
+
+    const result = operaciones(res, req, 'resta', numero1, numero2);
+    const resultadoResta = result.resultadoOperacion;
+    const cookieResult = result.cookieResult;
+
+    return {
+      parametrosdeCuerpoResult,
+      resultadoResta,
+      cookieResult,
+    };
+  }
+
+  //MULTIPLICACION
+  @Put('multiplicacion/:numero1/:numero2')
+  @HttpCode(200)
+  multiplicacion(@Param() params, @Req() req, @Res({ passthrough: true }) res) {
+    const parametrosResult = params;
+    const numero1 = Number(parametrosResult['numero1'].toString());
+    const numero2 = Number(parametrosResult['numero2'].toString());
+
+    const result = operaciones(res, req, 'multiplicacion', numero1, numero2);
+    const resultadoMultiplicacion = result.resultadoOperacion;
+    const cookieResult = result.cookieResult;
+    return {
+      parametrosResult,
+      resultadoMultiplicacion,
+      cookieResult,
+    };
+  }
+
+  //DIVISION
+
+
 }
 function operaciones(res, req, operacion, numero1, numero2) {
   let resultadoOperaciones: number;

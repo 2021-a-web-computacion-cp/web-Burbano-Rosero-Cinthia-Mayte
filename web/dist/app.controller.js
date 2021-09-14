@@ -77,6 +77,32 @@ let AppController = class AppController {
             cookieResult,
         };
     }
+    resta(bodyParams, cabecerasPeticion, req, res) {
+        const parametrosdeCuerpoResult = bodyParams;
+        const numero1 = Number(parametrosdeCuerpoResult['numero1'].toString());
+        const numero2 = Number(parametrosdeCuerpoResult['numero2'].toString());
+        const result = operaciones(res, req, 'resta', numero1, numero2);
+        const resultadoResta = result.resultadoOperacion;
+        const cookieResult = result.cookieResult;
+        return {
+            parametrosdeCuerpoResult,
+            resultadoResta,
+            cookieResult,
+        };
+    }
+    multiplicacion(params, req, res) {
+        const parametrosMC = params;
+        const numero1 = Number(parametrosMC['numero1'].toString());
+        const numero2 = Number(parametrosMC['numero2'].toString());
+        const result = operaciones(res, req, 'multiplicacion', numero1, numero2);
+        const resultadoMultiplicacion = result.resultadoOperacion;
+        const cookieResult = result.cookieResult;
+        return {
+            parametrosMC,
+            resultadoMultiplicacion,
+            cookieResult,
+        };
+    }
 };
 __decorate([
     common_1.Get(),
@@ -162,6 +188,27 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "suma", null);
+__decorate([
+    common_1.Post('resta'),
+    common_1.HttpCode(201),
+    __param(0, common_1.Body()),
+    __param(1, common_1.Headers()),
+    __param(2, common_1.Req()),
+    __param(3, common_1.Res({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object, Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "resta", null);
+__decorate([
+    common_1.Put('multiplicacion/:numero1/:numero2'),
+    common_1.HttpCode(200),
+    __param(0, common_1.Param()),
+    __param(1, common_1.Req()),
+    __param(2, common_1.Res({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "multiplicacion", null);
 AppController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [app_service_1.AppService])

@@ -8,12 +8,12 @@ export class UsuarioController {
     // Inyeccion dependencias
     private usuarioService: UsuarioService,
   ) {}
-/*
+
   @Get(':idUsuario')
   obtenerUno(@Param() parametrosRuta) {
     return this.usuarioService.buscarUno(+parametrosRuta.idUsuario);
   }
-*/
+/*
   @Put('/:idUsuario/:apellido/:nombre')
   actualizarUno(@Param() params) {
     const objWhere: Prisma.EPN_USUARIOWhereUniqueInput = {
@@ -47,5 +47,5 @@ export class UsuarioController {
     };
     this.usuarioService.eliminarUno(objUsuario) ;
     return "se elimino el usuario"
-  }
+  }*/
 }
