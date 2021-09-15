@@ -111,7 +111,7 @@ export class AppController {
       cabeceras: cabecerasPeticion,
     };
   }
-  //CALCULADORA
+  // DEBER CALCULADORA
 
   //SUMA
   @Get('suma/:numero1/:numero2')
@@ -169,7 +169,24 @@ export class AppController {
   }
 
   //DIVISION
+  @Get('division/:numero1/:numero2')
+  @HttpCode(200)
+  division(@Param() params, @Req() req, @Res({ passthrough: true }) res) {
+    //function operacionesMC(res, req, operacion, numero1, numero2)
+    const parametrosRuta = params;
+    const numero1 = Number(parametrosRuta['numero1'].toString());
+    const numero2 = Number(parametrosRuta['numero2'].toString());
 
+    const result = operaciones(res, req, 'division', numero1, numero2);
+    const resultadoDivision = result.resultadoOperacion;
+    const cookieResult = result.cookieResult;
+
+    return {
+      parametrosRuta,
+      resultadoDivision,
+      cookieResult,
+    };
+  }
 
 }
 function operaciones(res, req, operacion, numero1, numero2) {
@@ -204,7 +221,7 @@ function operaciones(res, req, operacion, numero1, numero2) {
       String(nuevoValor), // Valor
     );
     cookieResult['cookieOperacion'] = String(nuevoValor);
-    console.log('Se seteo la cookie');
+
   } else {
     const nuevoValor = Number(valorCookie) - resultadoOperaciones;
     if (nuevoValor > 0) {

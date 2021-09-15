@@ -103,6 +103,19 @@ let AppController = class AppController {
             cookieResult,
         };
     }
+    division(params, req, res) {
+        const parametrosRuta = params;
+        const numero1 = Number(parametrosRuta['numero1'].toString());
+        const numero2 = Number(parametrosRuta['numero2'].toString());
+        const result = operaciones(res, req, 'division', numero1, numero2);
+        const resultadoDivision = result.resultadoOperacion;
+        const cookieResult = result.cookieResult;
+        return {
+            parametrosRuta,
+            resultadoDivision,
+            cookieResult,
+        };
+    }
 };
 __decorate([
     common_1.Get(),
@@ -209,6 +222,16 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "multiplicacion", null);
+__decorate([
+    common_1.Get('division/:numero1/:numero2'),
+    common_1.HttpCode(200),
+    __param(0, common_1.Param()),
+    __param(1, common_1.Req()),
+    __param(2, common_1.Res({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "division", null);
 AppController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [app_service_1.AppService])

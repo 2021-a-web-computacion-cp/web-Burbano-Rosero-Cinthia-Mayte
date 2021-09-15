@@ -15,25 +15,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuarioController = void 0;
 const common_1 = require("@nestjs/common");
 const usuario_service_1 = require("./usuario.service");
+const usuario_crear_dto_1 = require("./dto/usuario-crear.dto");
 let UsuarioController = class UsuarioController {
     constructor(usuarioService) {
         this.usuarioService = usuarioService;
     }
-    crearUno(bodyParams) {
-        const objUsuario = {
-            apellido: bodyParams.apellido,
-            nombre: bodyParams.nombre,
-        };
-        return this.usuarioService.crearUno(objUsuario);
+    listaUsuarios(response) {
+        response.render('inicio');
+    }
+    obtenerUno(parametrosRuta) {
+        return this.usuarioService.buscarUno(+parametrosRuta.idUsuario);
+    }
+    async crearuno(paramétrosCuerpo) {
+        const usuarioCrearDto = new usuario_crear_dto_1.UsuarioCrearDto();
+        usuarioCrearDto.nombre = paramétrosCuerpo.nombre;
+        usuarioCrearDto.apellido = paramétrosCuerpo.apellido;
+        usuarioCrearDto.fechaCreacion = paramétrosCuerpo.fechaCreacion;
     }
 };
+__decorate([
+    common_1.Get('lista-usuarios'),
+    __param(0, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "listaUsuarios", null);
+__decorate([
+    common_1.Get(':idUsuario'),
+    __param(0, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "obtenerUno", null);
 __decorate([
     common_1.Post(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UsuarioController.prototype, "crearUno", null);
+    __metadata("design:returntype", Promise)
+], UsuarioController.prototype, "crearuno", null);
 UsuarioController = __decorate([
     common_1.Controller('usuario'),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])

@@ -36,4 +36,9 @@ export declare class AppController {
         resultadoMultiplicacion: string;
         cookieResult: any;
     };
+    division(params: any, req: any, res: any): {
+        parametrosRuta: any;
+        resultadoDivision: string;
+        cookieResult: any;
+    };
 }

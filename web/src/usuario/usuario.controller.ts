@@ -75,7 +75,7 @@ export class UsuarioController {
     usuarioCrearDto.apellido = paramétrosCuerpo.apellido;
     usuarioCrearDto.fechaCreacion = paramétrosCuerpo.fechaCreacion;
 
-    try {
+   /* try {
       const errores = await validate(usuarioCrearDto);
       if (errores.length > 0) {
         console.log(JSON.stringify(errores));
@@ -86,7 +86,7 @@ export class UsuarioController {
     } catch (error) {
       console.error({ error: error, mensaje: 'No envia bien los parámetros' });
       throw new InternalServerErrorException('Error servidor');
-    }
+    }*/
   }
 
 
