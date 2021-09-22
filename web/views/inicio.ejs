@@ -1,1 +1,36 @@
-<h1>Hola Mundo</h1>
+<%- include('./comunes/cabecera')%>
+
+<h1> Hola Mundo </h1>
+<-! <% %> Todo lo que esta dentro de esto es JS -->
+<--Mostrar = --->
+
+<p> <%= "Hola "%> </p>
+<p><%=15%></p>
+
+<-!-- Ejecutar --->
+
+<%const edison = {nombre: "Cinthia", apellido:"Burbano", cedula:"1725866170"}%>
+<%const numero = 24%>
+<%const mensaje = "Hola"%>
+
+<-!-- Ejemplo --->
+<p><%=edison.nombre%> <%=numero%> <%=mensaje %></p>
+
+<% const aprobado = true %>
+
+<% if(aprobado) { %>
+    <p> APROBADO </p>
+<% } else { %>
+    <p> RECHAZADO </p>
+<% }%>
+
+<%  const arregloNumero = [1,2,3,4,5]%>
+
+<ul>
+    <% arregloNumero.forEach((objetod)=>{ %>
+        <li><%= objetod %></li>
+    <% }) %>
+</ul>
+
+<%- include('./comunes/footer')%>
+

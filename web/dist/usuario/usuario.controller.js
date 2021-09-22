@@ -15,31 +15,74 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuarioController = void 0;
 const common_1 = require("@nestjs/common");
 const usuario_service_1 = require("./usuario.service");
-const usuario_crear_dto_1 = require("./dto/usuario-crear.dto");
 let UsuarioController = class UsuarioController {
     constructor(usuarioService) {
         this.usuarioService = usuarioService;
     }
-    listaUsuarios(response) {
+    inicio(response) {
         response.render('inicio');
+    }
+    async listaUsuarios(response, parametrosConsulta) {
+        try {
+            const respuesta = await this.usuarioService.buscarMuchos({
+                skip: parametrosConsulta.skip ? +parametrosConsulta.skip : undefined,
+                take: parametrosConsulta.take ? +parametrosConsulta.take : undefined,
+                busqueda: parametrosConsulta.busqueda ? parametrosConsulta.busqueda : undefined,
+            });
+            console.log(respuesta);
+            response.render('usuario/lista', {
+                datos: {
+                    usuarios: respuesta,
+                },
+            });
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Error del servidor');
+        }
+    }
+    vistaCrear(response) {
+        response.render("usuario/crear.ejs");
     }
     obtenerUno(parametrosRuta) {
         return this.usuarioService.buscarUno(+parametrosRuta.idUsuario);
     }
-    async crearuno(paramétrosCuerpo) {
-        const usuarioCrearDto = new usuario_crear_dto_1.UsuarioCrearDto();
-        usuarioCrearDto.nombre = paramétrosCuerpo.nombre;
-        usuarioCrearDto.apellido = paramétrosCuerpo.apellido;
-        usuarioCrearDto.fechaCreacion = paramétrosCuerpo.fechaCreacion;
+    actualizarUno(params) {
+        const objWhere = {
+            id: Number(params.idUsuario),
+        };
+        const objetoUsuarioUpdate = {
+            apellido: params.apellido,
+            nombre: params.nombre,
+        };
+        const parametrosActualizar = {
+            where: objWhere,
+            data: objetoUsuarioUpdate,
+        };
+        return this.usuarioService.actualizarUno(parametrosActualizar);
     }
 };
 __decorate([
-    common_1.Get('lista-usuarios'),
+    common_1.Get('inicio'),
     __param(0, common_1.Res()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "inicio", null);
+__decorate([
+    common_1.Get('lista-usuarios'),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Query()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "listaUsuarios", null);
+__decorate([
+    common_1.Get('vista-crear'),
+    __param(0, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "vistaCrear", null);
 __decorate([
     common_1.Get(':idUsuario'),
     __param(0, common_1.Param()),
@@ -48,12 +91,12 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsuarioController.prototype, "obtenerUno", null);
 __decorate([
-    common_1.Post(),
-    __param(0, common_1.Body()),
+    common_1.Put('/:idUsuario/:apellido/:nombre'),
+    __param(0, common_1.Param()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UsuarioController.prototype, "crearuno", null);
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "actualizarUno", null);
 UsuarioController = __decorate([
     common_1.Controller('usuario'),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])

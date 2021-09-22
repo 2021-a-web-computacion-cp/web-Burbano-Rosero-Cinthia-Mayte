@@ -263,7 +263,6 @@ function operaciones(res, req, operacion, numero1, numero2) {
         const nuevoValor = 100 - resultadoOperaciones;
         res.cookie('cookieOperacion', String(nuevoValor));
         cookieResult['cookieOperacion'] = String(nuevoValor);
-        console.log('Se seteo la cookie');
     }
     else {
         const nuevoValor = Number(valorCookie) - resultadoOperaciones;
