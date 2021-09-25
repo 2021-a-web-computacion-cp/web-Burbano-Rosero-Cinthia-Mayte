@@ -22,21 +22,18 @@ let EmpleadoService = class EmpleadoService {
                 OR: [
                     { nombre: { contains: parametrosBusqueda.busqueda } },
                     { apellido: { contains: parametrosBusqueda.busqueda } },
+                    { edad: { contains: parseInt(parametrosBusqueda.busqueda) } },
                 ],
-            }
-            : {};
-        console.log(or);
-        return this.prisma.ePN_USUARIO.findMany({
+            } : {};
+        return this.prisma..findMany({
             where: or,
             take: Number(parametrosBusqueda.take) || undefined,
             skip: Number(parametrosBusqueda.skip) || undefined,
         });
     }
-    buscarUnEmpleado(id) {
-        return this.prisma.ePN_USUARIO.findUnique({
-            where: {
-                id: id,
-            },
+    buscarUno(id) {
+        return this.prisma.pelicula.findUnique({
+            where: { id: id, },
         });
     }
 };

@@ -1,16 +1,16 @@
 import {
+  IsBoolean,
+  IsDate,
+  IsDecimal,
+  IsEmpty,
   IsNotEmpty,
+  IsNumber,
   IsString,
   MaxLength,
   MinLength,
-  IsNumber,
-  IsDate,
-  IsBoolean,
-  IsEmpty,
-  IsDecimal,
 } from 'class-validator';
 import { Decimal } from '@prisma/client/runtime';
-export class EmpleadoCrearDto {
+export class EmpleadoActualizarDto {
   @IsNotEmpty() // requerido
   @IsString()
   @MinLength(3)
