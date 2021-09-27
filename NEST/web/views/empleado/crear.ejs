@@ -1,0 +1,125 @@
+<%- include('../empleados-comunes/cabecera') %>
+<div class='container'>
+    <%const existeMensaje = typeof datos.mensaje !== 'undefined'%>
+    <%if(existeMensaje){%>
+    <div class="alert alert-success" role="alert">
+        <%=datos.mensaje%>
+    </div>
+    <%}%>
+    <h1>Crear Empleado</h1>
+    <form action="/empleado/crear-empleado-formulario" method="post">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">
+                Nombre*
+            </label>
+            <input placeholder="Ej: Cinthia"
+                   type="text"
+                   name="nombre"
+                   class="form-control"
+                   id="nombre"
+                   aria-describedby="ayudaNombre">
+            <div id="ayudaNombre" class="form-text"> Ingrese el Nombre. </div>
+        </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">
+                Apellido*
+            </label>
+            <input placeholder="Ej: Burbano"
+                   type="text"
+                   name="apellido"
+                   class="form-control"
+                   id="apellido"
+                   aria-describedby="ayudaApellido">
+            <div id="ayudaApellido" class="form-text"> Ingrese el Apellido. </div>
+        </div>
+        <div class="mb-3">
+            <label for="edad" class="form-label">
+                Edad*
+            </label>
+            <input placeholder="Ej: 24"
+                   type="text"
+                   name="edad"
+                   class="form-control"
+                   id="edad"
+                   aria-describedby="ayudaEdad">
+            <div id="ayudaEdad" class="form-text"> Ingrese la edad del empleado. </div>
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">
+                Direccion*
+            </label>
+            <input placeholder="Ej: AV. Joege Garces"
+                   type="text"
+                   name="direccion"
+                   class="form-control"
+                   id="direccion"
+                   aria-describedby="ayudaDireccion">
+            <div id="ayudaDireccion" class="form-text"> Ingrese la direccion del empleado. </div>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">
+                Telefono*
+            </label>
+            <input placeholder="Ej: 0222222222"
+                   type="text"
+                   name="telefono"
+                   class="form-control"
+                   id="telefono"
+                   aria-describedby="ayudaTelefono">
+            <div id="ayudaTelefono" class="form-text"> Ingrese el telefono del empleado. </div>
+        </div>
+        <div class="mb-3">
+            <label for="cargo" class="form-label">
+                Cargo*
+            </label>
+            <input placeholder="Ej: Contador"
+                   type="text"
+                   name="cargo"
+                   class="form-control"
+                   id="cargo"
+                   aria-describedby="ayudaCargo">
+            <div id="ayudaCargo" class="form-text"> Ingrese el cargo del empleado. </div>
+        </div>
+        <div class="mb-3">
+            <label for="discapacidad" class="form-label">
+                Discapacidad*
+            </label>
+            <input placeholder="Ej: 1 si es afirmativo 0 si es negativo"
+                   type="text"
+                   name="discapacidad"
+                   class="form-control"
+                   id="discapacidad"
+                   aria-describedby="ayudaDiscapacidad">
+            <div id="ayudaDiscapacidad" class="form-text"> Tiene discapacidad?. </div>
+        </div>
+        <div class="mb-3">
+            <label for="sueldo" class="form-label">
+                Sueldo*
+            </label>
+            <input placeholder="1000.00"
+                   type="text"
+                   name="sueldo"
+                   class="form-control"
+                   id="sueldo"
+                   aria-describedby="ayudaSueldo">
+            <div id="ayudaSueldo" class="form-text"> Ingrese el sueldo del empleado. </div>
+        </div>
+        <!--
+        <div class="mb-3">
+            <label for="fecha" class="form-label">
+                Fecha de creacion
+            </label>
+            <input
+                    type="date"
+                    id="fecha"
+                    name="fecha"
+                    class="form-control"
+                    aria-describedby="ayudaFecha">
+            <div id="ayudaFecha" class="form-text"> Ingrese la fecha. </div>
+        </div>
+        -->
+
+        <button type="submit" class="btn btn-primary w-100">Crear</button>
+    </form>
+</div>
+<%- include('../empleados-comunes/footer') %>

@@ -14,6 +14,7 @@ import { validate } from 'class-validator';
 import { stringify } from 'ts-jest/dist/utils/json';
 import { EmpleadoCrearDto } from './dto/empleado-crear.dto';
 import { EmpleadoActualizarDto } from './dto/empleado-actualizar.dto';
+import { response } from 'express';
 
 @Controller('empleado')
 export class EmpleadoController {
@@ -22,7 +23,7 @@ export class EmpleadoController {
     private empleadoService: EmpleadoService,
   ) {}
 
-  @Get('lista-empleado')
+  @Get('lista-empleados')
   async listaEmpleados(@Res() response, @Query() parametrosConsulta) {
     try {
       const respuesta = await this.empleadoService.buscarMuchosEmpleados({
@@ -43,6 +44,7 @@ export class EmpleadoController {
       throw new InternalServerErrorException('Error del servidor');
     }
   }
+
   @Get('vista-crear')
   vistaCrear(@Res() response, @Query() parametrosConsulta) {
     response.render('empleado/crear', {
@@ -106,8 +108,10 @@ export class EmpleadoController {
     empleadoActualizarDto.fechaIngreso = parametrosCuerpo.sueldo;
     try {
       const errores = await validate(empleadoActualizarDto);
+      response.redirect('/empleado/actualizar-empleado/' + parametrosRuta.idEmpleado);
 
       if (errores.length > 0) {
+        response.redirect('/empleado/actualizar-empleado/' + parametrosRuta.idEmpleado);
         console.log(JSON, stringify(errores));
         throw new BadRequestException('No envia bien parametros: ');
       } else {
@@ -122,7 +126,37 @@ export class EmpleadoController {
         );
       }
     } catch (error) {
+      response.redirect('/empleado/actualizar-empleado/' + parametrosRuta.idMovie);
       throw new InternalServerErrorException('Error actualizando empleado');
     }
   }
+@Get('idEmpleado')
+  async obtenerUno(@Param() parametrosRuta) {
+    try {
+      const respuesta = await this.empleadoService.buscarUnEmpleado(+parametrosRuta.idEmpleado);
+      console.log("-----------------------------");
+      console.log(respuesta);
+      response.render('empleado/actualizar', {
+        datos: {
+          empleados: respuesta,
+        },
+      });
+    }
+    catch (error) {
+      console.error(error);
+      throw new InternalServerErrorException('Error');
+    }
+  }
+
+@Post('eliminar-empleado/idEmpleado')
+async eliminarEmpleado(@Res() response, @Param() parametrosRuta) {
+  try {
+    await this.empleadoService.eliminarUEmpleadoo(+parametrosRuta.idEmpleado);
+    response.redirect('/empleado/lista-empleados' + '?mensaje=Se elimino el empleado');
+  }
+  catch (error) {
+    console.error(error);
+    throw new InternalServerErrorException('Error');
+  }
+}
 }

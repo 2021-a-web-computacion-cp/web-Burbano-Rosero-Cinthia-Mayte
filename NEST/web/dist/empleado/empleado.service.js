@@ -22,18 +22,38 @@ let EmpleadoService = class EmpleadoService {
                 OR: [
                     { nombre: { contains: parametrosBusqueda.busqueda } },
                     { apellido: { contains: parametrosBusqueda.busqueda } },
-                    { edad: { contains: parseInt(parametrosBusqueda.busqueda) } },
                 ],
-            } : {};
-        return this.prisma..findMany({
+            }
+            : {};
+        return this.prisma.empleado.findMany({
             where: or,
             take: Number(parametrosBusqueda.take) || undefined,
             skip: Number(parametrosBusqueda.skip) || undefined,
         });
     }
-    buscarUno(id) {
-        return this.prisma.pelicula.findUnique({
-            where: { id: id, },
+    buscarUnEmpleado(id) {
+        return this.prisma.empleado.findUnique({
+            where: {
+                id: id,
+            },
+        });
+    }
+    crearUnEmpleado(empleados) {
+        return this.prisma.empleado.create({
+            data: empleados,
+        });
+    }
+    eliminarUEmpleadoo(id) {
+        return this.prisma.empleado.delete({
+            where: { id: id },
+        });
+    }
+    actualizarUnEmpleado(parametrosActualizar) {
+        return this.prisma.empleado.update({
+            data: parametrosActualizar.data,
+            where: {
+                id: parametrosActualizar.id,
+            },
         });
     }
 };

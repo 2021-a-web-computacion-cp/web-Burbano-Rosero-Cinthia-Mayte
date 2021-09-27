@@ -1,5 +1,5 @@
 import { Decimal } from '@prisma/client/runtime';
-export declare class EmpleadoCrearDto {
+export declare class EmpleadoActualizarDto {
     nombre: string;
     apellido: string;
     edad: number;
