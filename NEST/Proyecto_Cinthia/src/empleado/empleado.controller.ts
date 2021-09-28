@@ -10,7 +10,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { EmpleadoService } from './empleado.service';
-import { EmpleadoCrearDto } from './dto/empleado-crear.dto.ts';
+import { EmpleadoCrearDto } from './dto/empleado-crear.dto';
 import { validate } from 'class-validator';
 import { EmpleadoConsultarMuchosDto } from './dto/empleado-consultar-muchos.dto';
 
@@ -72,14 +72,17 @@ export class EmpleadoController {
     console.log(parametrosDeCuerpo);
     const empleadoCrearDto = new EmpleadoCrearDto();
     empleadoCrearDto.nombre = parametrosDeCuerpo.nombre;
-    empleadoCrearDto.anio_creacion = +parametrosDeCuerpo.anio;
-    if (parametrosDeCuerpo.activa == 'true') {
-      empleadoCrearDto.activa = true;
+    empleadoCrearDto.apellido = parametrosDeCuerpo.apellido;
+    empleadoCrearDto.edad = parseInt(parametrosDeCuerpo.edad);
+    empleadoCrearDto.direccion = parametrosDeCuerpo.direccion;
+    empleadoCrearDto.telefono = parametrosDeCuerpo.telefono;
+    empleadoCrearDto.cargo = parametrosDeCuerpo.cargo;
+    if (parametrosDeCuerpo.discapacidad == 'true') {
+      empleadoCrearDto.discapacidad = true;
     } else {
-      empleadoCrearDto.activa = false;
+      empleadoCrearDto.discapacidad = false;
     }
-    empleadoCrearDto.num_integrantes = +parametrosDeCuerpo.integrantes;
-    empleadoCrearDto.genero = parametrosDeCuerpo.genero;
+    empleadoCrearDto.sueldo = parametrosDeCuerpo.sueldo;
     console.log(empleadoCrearDto);
     try {
       const errores = await validate(empleadoCrearDto);
@@ -104,21 +107,24 @@ export class EmpleadoController {
     console.log(parametrosDeCuerpo);
     const empleadoCrearDto = new EmpleadoCrearDto();
     empleadoCrearDto.nombre = parametrosDeCuerpo.nombre;
-    empleadoCrearDto.anio_creacion = +parametrosDeCuerpo.anio;
-    if (parametrosDeCuerpo.activa == 'true') {
-      empleadoCrearDto.activa = true;
+    empleadoCrearDto.apellido = parametrosDeCuerpo.apellido;
+    empleadoCrearDto.edad = parseInt(parametrosDeCuerpo.edad);
+    empleadoCrearDto.direccion = parametrosDeCuerpo.direccion;
+    empleadoCrearDto.telefono = parametrosDeCuerpo.telefono;
+    empleadoCrearDto.cargo = parametrosDeCuerpo.cargo;
+    if (parametrosDeCuerpo.discapacidad == 'true') {
+      empleadoCrearDto.discapacidad = true;
     } else {
-      empleadoCrearDto.activa = false;
+      empleadoCrearDto.discapacidad = false;
     }
-    empleadoCrearDto.num_integrantes = +parametrosDeCuerpo.integrantes;
-    empleadoCrearDto.genero = parametrosDeCuerpo.genero;
+    empleadoCrearDto.sueldo = parametrosDeCuerpo.sueldo;
     try {
       const errores = await validate(empleadoCrearDto);
       if (errores.length > 0) {
         console.log(JSON.stringify(errores));
         throw new BadRequestException('No envia bien paramentros');
       } else {
-        const respuestaUsuario = await this.empleadoService.crearUnEmpleado(
+        const respuestaEmpleado = await this.empleadoService.crearUnEmpleado(
           empleadoCrearDto,
         );
         response.redirect(
@@ -136,14 +142,15 @@ export class EmpleadoController {
   @Post('eliminar-empleado/:idEmpleado')
   async eliminarEmpleado(@Res() response, @Param() parametrosRuta) {
     try {
-      await this.empleadoService.eliminarUnEmpleado(+parametrosRuta.idEmpleado);
+      await this.empleadoService.eliminarUEmpleadoo(+parametrosRuta.idEmpleado);
       response.redirect(
-        '/empleado/lista-empleados' + '?mensaje= Se eliminó el empleado'+ parametrosRuta.nombre,
+        '/empleado/lista-empleados' +
+          '?mensaje= Se eliminó el empleado' +
+          parametrosRuta.nombre,
       );
     } catch (error) {
       console.error(error);
       throw new InternalServerErrorException('Error al eliminar');
     }
   }
-
 }

@@ -17,7 +17,7 @@ model Empleado{
   edad              Int
   direccion         String
   telefono          String
-  Discapacidad      Boolean
+  discapacidad      Boolean
   cargo             String
   fechaIngreso      DateTime     @default(now())
   sueldo            Decimal

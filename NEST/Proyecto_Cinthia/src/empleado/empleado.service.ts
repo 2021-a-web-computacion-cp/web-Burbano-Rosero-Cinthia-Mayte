@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+// @ts-ignore
 import { PrismaService } from './prisma.service';
 import { Prisma } from '@prisma/client';
 
@@ -6,49 +7,52 @@ import { Prisma } from '@prisma/client';
 export class EmpleadoService {
   constructor(private prisma: PrismaService) {}
 
-  buscarUnEmpleado(id: number) {
-    return this.prisma.bANDA_MUSICAL.findUnique({
-      where: { id: id },
-    });
-  }
-
-  crearUnEmpleado(banda: Prisma.BANDA_MUSICALCreateInput) {
-    return this.prisma.bANDA_MUSICAL.create({ data: banda });
-  }
-
   buscarMuchosEmpleados(parametrosBusqueda: {
-    skip?: number; //Registros que te saltas
-    take?: number; //Registros que tomas
-    busqueda?: string; // Lo que el usuario busca
+    skip?: number; // registros que te saltes 0 10 20
+    take?: number; // registros tomas 10 10 10
+    busqueda?: string; // Adr
   }) {
     const or = parametrosBusqueda.busqueda
       ? {
-          OR: [
-            { nombre: { contains: parametrosBusqueda.busqueda } },
-            { genero: { contains: parametrosBusqueda.busqueda } },
+        OR: [
+          { nombre: { contains: parametrosBusqueda.busqueda } },
+          { apellido: { contains: parametrosBusqueda.busqueda } },
           ],
-        }
+      }
       : {};
-    return this.prisma.bANDA_MUSICAL.findMany({
+    return this.prisma.empleado.findMany({
       where: or,
       take: Number(parametrosBusqueda.take) || undefined,
       skip: Number(parametrosBusqueda.skip) || undefined,
     });
   }
 
-  actualizarUnEmpleado(parametrosActualizar: {
-    id: number;
-    data: Prisma.BANDA_MUSICALUpdateInput;
-  }) {
-    return this.prisma.bANDA_MUSICAL.update({
-      data: parametrosActualizar.data,
-      where: { id: parametrosActualizar.id },
+  buscarUnEmpleado(id: number) {
+    return this.prisma.empleado.findUnique({
+      where: {
+        id: id,
+      },
     });
   }
-
-  eliminarUnEmpleado(id: number) {
-    return this.prisma.bANDA_MUSICAL.delete({
+  crearUnEmpleado(empleados: Prisma.EmpleadoCreateInput) {
+    return this.prisma.empleado.create({
+      data: empleados,
+    });
+  }
+  eliminarUEmpleadoo(id: number) {
+    return this.prisma.empleado.delete({
       where: { id: id },
+    });
+  }
+  actualizarUnEmpleado(parametrosActualizar:{
+    id: number;
+    data: Prisma.EmpleadoUpdateInput;
+  }) {
+    return this.prisma.empleado.update({
+      data: parametrosActualizar.data,
+      where: {
+        id: parametrosActualizar.id,
+      },
     });
   }
 }
