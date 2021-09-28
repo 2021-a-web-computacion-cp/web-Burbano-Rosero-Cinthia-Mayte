@@ -36,7 +36,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(6),
+    (0, class_validator_1.MinLength)(4),
     (0, class_validator_1.MaxLength)(50),
     __metadata("design:type", String)
 ], EmpleadoCrearDto.prototype, "direccion", void 0);

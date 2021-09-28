@@ -13,11 +13,9 @@ import { EmpleadoService } from './empleado.service';
 import { EmpleadoCrearDto } from './dto/empleado-crear.dto';
 import { validate } from 'class-validator';
 import { EmpleadoConsultarMuchosDto } from './dto/empleado-consultar-muchos.dto';
-
 @Controller('empleado')
 export class EmpleadoController {
   constructor(private empleadoService: EmpleadoService) {}
-
   @Get('lista-empleados')
   async listarEmpleado(@Res() response, @Query() parametrosConsulta) {
     const empleadoConsultarDto = new EmpleadoConsultarMuchosDto();
@@ -42,7 +40,6 @@ export class EmpleadoController {
       throw new InternalServerErrorException('Error servidor');
     }
   }
-
   @Get('vista-crear')
   vistaCrear(@Res() response, @Query() parametrosConsulta) {
     response.render('empleado/crear', {
@@ -51,7 +48,6 @@ export class EmpleadoController {
       },
     });
   }
-
   @Get('vista-editar/:idEmpleado')
   async vistaEditar(@Res() response, @Param() parametrosRuta) {
     try {
@@ -66,7 +62,6 @@ export class EmpleadoController {
       throw new InternalServerErrorException('Error al editar');
     }
   }
-
   @Post('editar-empleado-formulario')
   async editarEmpleadoFormulario(@Res() response, @Body() parametrosDeCuerpo) {
     console.log(parametrosDeCuerpo);
@@ -101,7 +96,6 @@ export class EmpleadoController {
       throw new InternalServerErrorException('Error servidor');
     }
   }
-
   @Post('crear-empleado-formulario')
   async crearEmpleadoFormulario(@Res() response, @Body() parametrosDeCuerpo) {
     console.log(parametrosDeCuerpo);
@@ -138,7 +132,6 @@ export class EmpleadoController {
       throw new InternalServerErrorException('Error servidor');
     }
   }
-
   @Post('eliminar-empleado/:idEmpleado')
   async eliminarEmpleado(@Res() response, @Param() parametrosRuta) {
     try {

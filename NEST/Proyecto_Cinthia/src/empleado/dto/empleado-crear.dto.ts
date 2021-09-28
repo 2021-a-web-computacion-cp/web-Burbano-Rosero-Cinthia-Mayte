@@ -29,7 +29,7 @@ export class EmpleadoCrearDto {
 
   @IsNotEmpty() // requerido
   @IsString()
-  @MinLength(6)
+  @MinLength(4)
   @MaxLength(50)
   direccion: string;
 
