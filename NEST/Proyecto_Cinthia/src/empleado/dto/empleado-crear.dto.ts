@@ -25,13 +25,11 @@ export class EmpleadoCrearDto {
 
   @IsNotEmpty() // requerido
   @IsNumber()
-  @MinLength(1)
-  @MaxLength(3)
   edad: number;
 
   @IsNotEmpty() // requerido
   @IsString()
-  @MinLength(10)
+  @MinLength(6)
   @MaxLength(50)
   direccion: string;
 
@@ -47,17 +45,12 @@ export class EmpleadoCrearDto {
 
   @IsNotEmpty() // requerido
   @IsString()
-  @MinLength(16)
+  @MinLength(6)
   @MaxLength(30)
   cargo: string;
 
-  @IsEmpty()
-  @IsDate()
-  fechaIngreso: string;
 
   @IsNotEmpty() // requerido
   @IsDecimal()
-  @MinLength(10)
-  @MaxLength(50)
   sueldo: Decimal;
 }

@@ -6,6 +6,6 @@ export declare class EmpleadoController {
     vistaCrear(response: any, parametrosConsulta: any): void;
     vistaEditar(response: any, parametrosRuta: any): Promise<void>;
     editarEmpleadoFormulario(response: any, parametrosDeCuerpo: any): Promise<void>;
-    crearBandaFormulario(response: any, parametrosDeCuerpo: any): Promise<void>;
+    crearEmpleadoFormulario(response: any, parametrosDeCuerpo: any): Promise<void>;
     eliminarEmpleado(response: any, parametrosRuta: any): Promise<void>;
 }

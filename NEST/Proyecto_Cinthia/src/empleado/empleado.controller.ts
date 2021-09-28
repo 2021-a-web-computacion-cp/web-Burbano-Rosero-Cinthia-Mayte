@@ -34,7 +34,7 @@ export class EmpleadoController {
           empleadoConsultarDto,
         );
         response.render('empleado/lista', {
-          datos: { empleado: respuesta, mensaje: parametrosConsulta.mensaje },
+          datos: { empleado: respuesta, mensaje: parametrosConsulta.mensaje, },
         });
       }
     } catch (error) {
@@ -103,7 +103,7 @@ export class EmpleadoController {
   }
 
   @Post('crear-empleado-formulario')
-  async crearBandaFormulario(@Res() response, @Body() parametrosDeCuerpo) {
+  async crearEmpleadoFormulario(@Res() response, @Body() parametrosDeCuerpo) {
     console.log(parametrosDeCuerpo);
     const empleadoCrearDto = new EmpleadoCrearDto();
     empleadoCrearDto.nombre = parametrosDeCuerpo.nombre;

@@ -31,14 +31,12 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.MinLength)(1),
-    (0, class_validator_1.MaxLength)(3),
     __metadata("design:type", Number)
 ], EmpleadoCrearDto.prototype, "edad", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(10),
+    (0, class_validator_1.MinLength)(6),
     (0, class_validator_1.MaxLength)(50),
     __metadata("design:type", String)
 ], EmpleadoCrearDto.prototype, "direccion", void 0);
@@ -57,20 +55,13 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(16),
+    (0, class_validator_1.MinLength)(6),
     (0, class_validator_1.MaxLength)(30),
     __metadata("design:type", String)
 ], EmpleadoCrearDto.prototype, "cargo", void 0);
 __decorate([
-    (0, class_validator_1.IsEmpty)(),
-    (0, class_validator_1.IsDate)(),
-    __metadata("design:type", String)
-], EmpleadoCrearDto.prototype, "fechaIngreso", void 0);
-__decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsDecimal)(),
-    (0, class_validator_1.MinLength)(10),
-    (0, class_validator_1.MaxLength)(50),
     __metadata("design:type", runtime_1.Decimal)
 ], EmpleadoCrearDto.prototype, "sueldo", void 0);
 exports.EmpleadoCrearDto = EmpleadoCrearDto;

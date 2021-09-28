@@ -36,7 +36,7 @@ let EmpleadoController = class EmpleadoController {
             else {
                 const respuesta = await this.empleadoService.buscarMuchosEmpleados(empleadoConsultarDto);
                 response.render('empleado/lista', {
-                    datos: { empleado: respuesta, mensaje: parametrosConsulta.mensaje },
+                    datos: { empleado: respuesta, mensaje: parametrosConsulta.mensaje, },
                 });
             }
         }
@@ -100,7 +100,7 @@ let EmpleadoController = class EmpleadoController {
             throw new common_1.InternalServerErrorException('Error servidor');
         }
     }
-    async crearBandaFormulario(response, parametrosDeCuerpo) {
+    async crearEmpleadoFormulario(response, parametrosDeCuerpo) {
         console.log(parametrosDeCuerpo);
         const empleadoCrearDto = new empleado_crear_dto_1.EmpleadoCrearDto();
         empleadoCrearDto.nombre = parametrosDeCuerpo.nombre;
@@ -186,7 +186,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], EmpleadoController.prototype, "crearBandaFormulario", null);
+], EmpleadoController.prototype, "crearEmpleadoFormulario", null);
 __decorate([
     (0, common_1.Post)('eliminar-empleado/:idEmpleado'),
     __param(0, (0, common_1.Res)()),

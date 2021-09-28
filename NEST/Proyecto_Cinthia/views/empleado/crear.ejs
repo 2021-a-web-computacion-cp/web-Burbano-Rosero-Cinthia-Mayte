@@ -7,37 +7,67 @@
         </div>
     <%}%>
     <ul>
-        <li><a  href= '/banda/lista-bandas'> Regresar a Lista de Bandas</a></li>
+        <li><a  href= '/empleado/lista-empleados'> Regresar a Lista de Empleados</a></li>
     </ul>
-    <h1 style="text-align:center">Crear Banda</h1>
-    <form action="/banda/crear-banda-formulario" method="post">
+    <h1 style="text-align:center">Crear Empleado</h1>
+    <form action="/empleado/crear-empleado-formulario" method="post">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre*</label>
-            <input placeholder="Ej: Biruls" type="text" name="nombre" class="form-control" id="nombre" aria-describedby="ayudaNombre">
-            <div id="ayudaNombre" class="form-text">Ingrese Nombre</div>
+            <input placeholder="Ej: Cinthia" type="text"
+                   name="nombre" class="form-control"
+                   id="nombre" aria-describedby="ayudaNombre">
+            <div id="ayudaNombre" class="form-text">Ingrese el Nombre del empleado</div>
         </div>
         <div class="mb-3">
-            <label for="anio" class="form-label">Año Creacion*</label>
-            <input placeholder="Ej: 1984" type="number" name="anio" class="form-control" id="anio"  min="1901" max="2021" aria-describedby="ayudaAnio">
-            <div id="ayudaAnio" class="form-text">Ingrese Año de Creacion</div>
+            <label for="apellido" class="form-label">Apellido*</label>
+            <input placeholder="Ej: Burbano" type="text"
+                   name="apellido" class="form-control"
+                   id="apellido" aria-describedby="ayudaApellido">
+            <div id="ayudaApellido" class="form-text">Ingrese el Apellido del empleado</div>
         </div>
         <div class="mb-3">
-            <label for="integrantes" class="form-label">Numero Integrantes*</label>
-            <input placeholder="Ej: 5" type="number" name="integrantes" class="form-control" id="integrantes"  min="1" aria-describedby="ayudaIntegrantes">
-            <div id="ayudaIntegrantes" class="form-text">Ingrese Numero de Integrantes</div>
+            <label for="edad" class="form-label">Edad*</label>
+            <input placeholder="Ej: 25" type="number"
+                   min="1"
+                   name="edad" class="form-control"
+                   id="edad" aria-describedby="ayudaEdad">
+            <div id="ayudaEdad" class="form-text">Ingrese la Edad del empleado</div>
         </div>
         <div class="mb-3">
-        <label for="activa" class="form-label">Banda Activa*</label>
-            <select id="activa" name="activa">
+            <label for="direccion" class="form-label">Direccion*</label>
+            <input placeholder="Ej: AV. Jorge Garces" type="text"
+                   name="direccion" class="form-control"
+                   id="direccion" aria-describedby="ayudaDireccion">
+            <div id="ayudaDireccion" class="form-text">Ingrese la Direccion del empleado</div>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Telefono*</label>
+            <input placeholder="Ej:09999999999 " type="text"
+                   name="telefono" class="form-control"
+                   id="telefono" aria-describedby="ayudaTelefono">
+            <div id="ayudaTelefono" class="form-text">Ingrese el Telefono del empleado</div>
+        </div>
+        <div class="mb-3">
+            <label for="discapacidad" class="form-label">Discapacidad*</label>
+            <select id="discapacidad" name="discapacidad">
                 <option value="true">Si</option>
                 <option value="false">No</option>
             </select>
-            <div id="ayudaIntegrantes" class="form-text">Seleccione si la banda se encuentra activa</div>
+            <div id="ayudaDiscapacidad" class="form-text">Seleccione si, si el empleado tiene discapacidad</div>
         </div>
         <div class="mb-3">
-            <label for="genero" class="form-label">Genero*</label>
-            <input placeholder="Ej: Rock" type="text" name="genero" class="form-control" id="genero" aria-describedby="ayudaGenero">
-            <div id="ayudaGenero" class="form-text">Ingrese Genero</div>
+            <label for="cargo" class="form-label">Cargo*</label>
+            <input placeholder="Ej:Contador " type="text"
+                   name="cargo" class="form-control"
+                   id="cargo" aria-describedby="ayudaCargo">
+            <div id="ayudaCargo" class="form-text">Ingrese el Cargo del empleado</div>
+        </div>
+        <div class="mb-3">
+            <label for="sueldo" class="form-label">Sueldo*</label>
+            <input placeholder="Ej:100.00 " type="number"
+                   name="sueldo" class="form-control"
+                   id="sueldo" aria-describedby="ayudaSueldo">
+            <div id="ayudaSueldo" class="form-text">Ingrese el sueldo del empleado</div>
         </div>
         <button type="submit" class="btn btn-primary w-100">Crear</button>
     </form>

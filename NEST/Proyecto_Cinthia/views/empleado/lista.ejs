@@ -6,54 +6,65 @@
             <%= datos.mensaje%>
         </div>
     <%}%>
-    <h1>Lista de Bandas</h1>
-    <form action=" /banda/lista-bandas" method="get">
+    <h1>Lista de Empleados</h1>
+    <form action=" /empleado/lista-empleados" method="get">
         <div class="mb-3">
-            <label for="busqueda" class="form-label">BUSQUEDA </label>
-            <input placeholder="Ej: Beatles" type="text" name="busqueda" class="form-control" id="busqueda" aria-describedby="ayudaBusqueda">
-            <div id="ayudaBusqueda" class="form-text"> Puede buscar por Nombre de Banda o Genero. </div>
+            <label for="busqueda"
+                   class="form-label">BUSQUEDA </label>
+            <input placeholder="Ej: Cinthia"
+                   type="text" name="busqueda"
+                   class="form-control"
+                   id="busqueda" aria-describedby="ayudaBusqueda">
+            <div id="ayudaBusqueda" class="form-text"> Puede buscar por Nombre de empleado. </div>
         </div>
         <button type="submit" class="btn btn-primary w-100">Buscar</button>
     </form>
     <div class="d-flex justify-content-end">
-        <a href="/banda/vista-crear">
-            <button class="btn btn-success btn-lg ">Crear Banda</button>
+        <a href="/empleado/vista-crear">
+            <button class="btn btn-success btn-lg ">Crear Empleado</button>
         </a>
     </div>
     <table class="table text-center" >
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Año Creacion</th>
-            <th scope="col">Activa</th>
-            <th scope="col">N. Integrantes</th>
-            <th scope="col">Genero</th>
-            <th scope="col">Eliminar</th>
-            <th scope="col">Editar</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">APELLIDO</th>
+            <th scope="col">EDAD</th>
+            <th scope="col">DIRECCION</th>
+            <th scope="col">TELEFONO</th>
+            <th scope="col">DISCAPACIDAD</th>
+            <th scope="col">CARGO</th>
+            <th scope="col">FECHA INGRESO</th>
+            <th scope="col">SUELDO</th>
         </tr>
         </thead>
         <tbody>
-        <% datos.bandas.forEach((objeto) => { %>
+        <% datos.empleado.forEach((objeto) => { %>
             <tr>
                 <th><%= objeto.id %></th>
                 <th><%= objeto.nombre %></th>
-                <th><%= objeto.anio_creacion %></th>
-                <th><%= objeto.activa %></th>
-                <th><%= objeto.num_integrantes %></th>
-                <th><%= objeto.genero %></th>
+                <th><%= objeto.apellido %></th>
+                <th><%= objeto.edad %></th>
+                <th><%= objeto.direccion %></th>
+                <th><%= objeto.telefono %></th>
+                <th><%= objeto.discapacidad %></th>
+                <th><%= objeto.cargo %></th>
+                <th><%= objeto.fechaIngreso %></th>
+                <th><%= objeto.sueldo %></th>
                 <th>
-                    <form action="/banda/eliminar-banda/<%= objeto.id %>" method="post">
-                        <button class="btn btn-danger">Eliminar</button>
-                    </form>
-                </th>
-                <th>
-                    <a href="/banda/vista-editar/<%= objeto.id %>">
+                    <a href="/empleado/vista-editar/<%= objeto.id %>">
                         <button class="btn btn-secondary">
                             Editar
                         </button>
                     </a>
                 </th>
+                <th>
+                    <form action="/empleado/eliminar-empleado/<%= objeto.id %>" method="post">
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                </th>
+
             </tr>
         <% } ) %>
         </tbody>

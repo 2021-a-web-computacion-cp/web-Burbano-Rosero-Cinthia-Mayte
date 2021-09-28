@@ -7,6 +7,5 @@ export declare class EmpleadoCrearDto {
     telefono: string;
     discapacidad: boolean;
     cargo: string;
-    fechaIngreso: string;
     sueldo: Decimal;
 }
